@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Over∞Stile — Streetwear</title>
+<meta name="description" content="Over∞Stile — magliette grafiche streetwear. Collezione, contatti e assistenza.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0a;
+    --bg-soft:#121212;
+    --bg-card:#151515;
+    --fg:#f4f2ec;
+    --fg-dim:#918f88;
+    --fg-faint:#5c5a55;
+    --line:rgba(244,242,236,.10);
+    --line-strong:rgba(244,242,236,.22);
+    --chrome-a:#4b4b4b;
+    --chrome-b:#ffffff;
+    --chrome-c:#8c8c8c;
+    --chrome-d:#f2f2f2;
+    --chrome-e:#333333;
+    --radius:2px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--fg);
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:400;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  img,svg{display:block;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 32px;}
+  ::selection{background:var(--fg); color:var(--bg);}
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+    outline:1px solid var(--fg); outline-offset:3px;
+  }
+
+  .eyebrow{
+    font-size:12px; letter-spacing:.28em; text-transform:uppercase;
+    color:var(--fg-dim); font-weight:500; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:""; width:22px; height:1px; background:var(--fg-dim);}
+
+  .chrome-text{
+    background:linear-gradient(100deg,var(--chrome-a) 0%, var(--chrome-b) 22%, var(--chrome-c) 45%, var(--chrome-d) 65%, var(--chrome-e) 100%);
+    background-size:220% 100%;
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    animation:sheen 7s linear infinite;
+  }
+  @keyframes sheen{0%{background-position:0% 0;}100%{background-position:220% 0;}}
+  @media (prefers-reduced-motion:reduce){ .chrome-text{animation:none;} }
+
+  /* ---------- Header ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:rgba(10,10,10,.72); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 32px; max-width:1180px; margin:0 auto;
+  }
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand .mark{width:34px; height:20px;}
+  .brand .word{
+    font-family:'Unbounded', sans-serif; font-weight:800; font-size:16px;
+    letter-spacing:.01em;
+  }
+  .nav-links{display:flex; align-items:center; gap:34px;}
+  .nav-links a{
+    font-size:13px; letter-spacing:.06em; text-transform:uppercase; color:var(--fg-dim);
+    transition:color .25s ease; position:relative;
+  }
+  .nav-links a:hover{color:var(--fg);}
+  .nav-cta{
+    font-size:12px; letter-spacing:.1em; text-transform:uppercase;
+    border:1px solid var(--line-strong); padding:9px 18px; border-radius:var(--radius);
+    transition:all .25s ease; white-space:nowrap;
+  }
+  .nav-cta:hover{background:var(--fg); color:var(--bg); border-color:var(--fg);}
+  .nav-toggle{display:none; background:none; border:none; color:var(--fg); font-size:22px; cursor:pointer;}
+
+  @media (max-width:820px){
+    .nav-links{
+      position:fixed; top:66px; left:0; right:0; background:var(--bg-soft);
+      flex-direction:column; align-items:flex-start; gap:0; padding:8px 32px 20px;
+      border-bottom:1px solid var(--line); transform:translateY(-8px); opacity:0; pointer-events:none;
+      transition:all .25s ease;
+    }
+    .nav-links.open{transform:translateY(0); opacity:1; pointer-events:auto;}
+    .nav-links a{padding:14px 0; width:100%; border-bottom:1px solid var(--line);}
+    .nav-cta{margin-top:14px;}
+    .nav-toggle{display:block;}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative; min-height:100svh; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center;
+    padding:140px 24px 80px; overflow:hidden;
+  }
+  .hero-mark{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-52%);
+    width:min(74vw, 620px); opacity:.16; pointer-events:none; z-index:0;
+  }
+  .hero-inner{position:relative; z-index:1;}
+  .hero .eyebrow{justify-content:center; margin-bottom:26px;}
+  .hero .eyebrow::before{display:none;}
+  h1.wordmark{
+    font-family:'Unbounded', sans-serif; font-weight:800;
+    font-size:clamp(42px, 10vw, 118px); line-height:0.98; letter-spacing:-.01em;
+  }
+  h1.wordmark .inf{
+    font-size:1.05em; padding:0 .02em; display:inline-block;
+    transform:translateY(.03em);
+  }
+  .tagline{
+    margin:26px auto 0; max-width:520px; color:var(--fg-dim);
+    font-size:16px; letter-spacing:.01em;
+  }
+  .hero-actions{display:flex; gap:16px; justify-content:center; margin-top:44px; flex-wrap:wrap;}
+  .btn{
+    font-family:'Space Grotesk', sans-serif; font-size:13px; letter-spacing:.08em; text-transform:uppercase;
+    padding:15px 30px; border-radius:var(--radius); cursor:pointer; border:1px solid var(--line-strong);
+    transition:all .25s ease; font-weight:500;
+  }
+  .btn-primary{background:var(--fg); color:var(--bg); border-color:var(--fg);}
+  .btn-primary:hover{background:transparent; color:var(--fg);}
+  .btn-ghost{background:transparent; color:var(--fg);}
+  .btn-ghost:hover{background:var(--fg); color:var(--bg);}
+  .scroll-cue{
+    position:absolute; bottom:34px; left:50%; transform:translateX(-50%);
+    font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--fg-faint);
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+  }
+  .scroll-cue .line{width:1px; height:34px; background:linear-gradient(var(--fg-faint), transparent); animation:pulse 2.4s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:.3;}50%{opacity:1;}}
+
+  /* ---------- Manifesto ---------- */
+  section{padding:120px 0;}
+  .manifesto{border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--bg-soft);}
+  .manifesto .wrap{display:grid; grid-template-columns:.9fr 1.6fr; gap:60px; align-items:start;}
+  .manifesto h2{
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(26px,3.4vw,38px);
+    line-height:1.25; letter-spacing:-.01em;
+  }
+  .manifesto p{color:var(--fg-dim); font-size:16px; max-width:46ch; margin-top:18px;}
+  @media (max-width:820px){ .manifesto .wrap{grid-template-columns:1fr; gap:24px;} }
+
+  /* ---------- Catalogo ---------- */
+  .cat-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:56px; gap:24px; flex-wrap:wrap;}
+  .cat-head h2{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(30px,4vw,46px); letter-spacing:-.01em;}
+  .cat-note{color:var(--fg-dim); font-size:14px; max-width:34ch;}
+
+  .grid-products{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line);}
+  @media (max-width:920px){ .grid-products{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:600px){ .grid-products{grid-template-columns:1fr;} }
+
+  .product{
+    background:var(--bg); padding:38px 30px 30px; display:flex; flex-direction:column; gap:22px;
+    transition:background .3s ease;
+  }
+  .product:hover{background:var(--bg-card);}
+  .tee-stage{
+    position:relative; height:230px; display:flex; align-items:center; justify-content:center;
+  }
+  .tee-shape{
+    width:150px; height:170px;
+    background:#1c1c1c;
+    border:1px solid var(--line-strong);
+    clip-path:polygon(22% 0%, 38% 0%, 50% 9%, 62% 0%, 78% 0%, 100% 19%, 84% 33%, 78% 29%, 78% 100%, 22% 100%, 22% 29%, 16% 33%, 0% 19%);
+    display:flex; align-items:center; justify-content:center; overflow:hidden;
+    position:relative;
+  }
+  .tee-shape .graphic{
+    font-family:'Unbounded', sans-serif; font-weight:700; font-size:11px; text-align:center;
+    letter-spacing:.04em; line-height:1.5; padding:0 14px;
+  }
+  .tee-shape.stripe::before{
+    content:""; position:absolute; inset:0;
+    background:repeating-linear-gradient(115deg, transparent 0 12px, rgba(244,242,236,.05) 12px 13px);
+  }
+  .product h3{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:17px;}
+  .product .meta{display:flex; justify-content:space-between; align-items:center;}
+  .product .price{color:var(--fg-dim); font-size:14px;}
+  .product .go{
+    font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--fg-dim);
+    border-bottom:1px solid var(--fg-faint); padding-bottom:2px; transition:all .25s ease;
+  }
+  .product .go:hover{color:var(--fg); border-color:var(--fg);}
+
+  /* ---------- Trust strip ---------- */
+  .trust{border-top:1px solid var(--line); background:var(--bg-soft);}
+  .trust .wrap{display:grid; grid-template-columns:repeat(3,1fr); gap:40px;}
+  @media (max-width:820px){ .trust .wrap{grid-template-columns:1fr; gap:36px;} }
+  .trust-item{display:flex; gap:18px; align-items:flex-start;}
+  .trust-item svg{flex-shrink:0; margin-top:2px;}
+  .trust-item h4{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px; margin-bottom:6px;}
+  .trust-item p{color:var(--fg-dim); font-size:13.5px; max-width:32ch;}
+
+  /* ---------- Contatti ---------- */
+  .contatti .wrap{display:grid; grid-template-columns:1fr 1fr; gap:70px;}
+  @media (max-width:820px){ .contatti .wrap{grid-template-columns:1fr; gap:50px;} }
+  .contatti h2{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(28px,3.6vw,40px); margin-bottom:14px; letter-spacing:-.01em;}
+  .contatti > .wrap > div > p.lead{color:var(--fg-dim); font-size:15px; margin-bottom:34px; max-width:40ch;}
+
+  .field{margin-bottom:20px;}
+  .field label{display:block; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--fg-dim); margin-bottom:8px;}
+  .field input, .field textarea{
+    width:100%; background:transparent; border:none; border-bottom:1px solid var(--line-strong);
+    color:var(--fg); font-family:'Space Grotesk',sans-serif; font-size:15px; padding:10px 2px;
+    transition:border-color .25s ease;
+  }
+  .field input:focus, .field textarea:focus{border-color:var(--fg); outline:none;}
+  .field textarea{resize:vertical; min-height:90px;}
+  .form-submit{margin-top:8px;}
+
+  .social-list{display:flex; flex-direction:column; gap:0; border-top:1px solid var(--line);}
+  .social-list a{
+    display:flex; justify-content:space-between; align-items:center; padding:20px 0;
+    border-bottom:1px solid var(--line); font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:500;
+  }
+  .social-list a span.handle{color:var(--fg-dim); font-size:13px; font-weight:400;}
+  .social-list a .arrow{transition:transform .25s ease;}
+  .social-list a:hover .arrow{transform:translateX(6px);}
+  .contact-direct{margin-top:34px; color:var(--fg-dim); font-size:14px;}
+  .contact-direct a{color:var(--fg); border-bottom:1px solid var(--fg-faint);}
+
+  /* ---------- Footer ---------- */
+  footer{border-top:1px solid var(--line); padding:44px 0; }
+  footer .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
+  footer .word{font-family:'Unbounded',sans-serif; font-weight:700; font-size:14px;}
+  footer .fine{color:var(--fg-faint); font-size:12.5px;}
+  footer .flinks{display:flex; gap:22px;}
+  footer .flinks a{color:var(--fg-dim); font-size:12.5px; letter-spacing:.04em;}
+  footer .flinks a:hover{color:var(--fg);}
+
+  /* ---------- AI Assistant ---------- */
+  .ai-toggle{
+    position:fixed; bottom:26px; right:26px; z-index:60;
+    width:58px; height:58px; border-radius:50%; background:var(--fg); color:var(--bg);
+    border:none; cursor:pointer; display:flex; align-items:center; justify-content:center;
+    box-shadow:0 8px 30px rgba(0,0,0,.45); transition:transform .25s ease;
+  }
+  .ai-toggle:hover{transform:scale(1.06);}
+  .ai-panel{
+    position:fixed; bottom:96px; right:26px; z-index:60; width:340px; max-width:calc(100vw - 40px);
+    height:440px; max-height:calc(100vh - 150px);
+    background:var(--bg-soft); border:1px solid var(--line-strong); border-radius:6px;
+    display:flex; flex-direction:column; overflow:hidden;
+    transform:translateY(16px) scale(.98); opacity:0; pointer-events:none;
+    transition:all .25s ease; box-shadow:0 20px 60px rgba(0,0,0,.5);
+  }
+  .ai-panel.open{transform:translateY(0) scale(1); opacity:1; pointer-events:auto;}
+  .ai-head{
+    padding:16px 18px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:10px;
+  }
+  .ai-dot{width:8px; height:8px; border-radius:50%; background:#7bffa0;}
+  .ai-head strong{font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:600;}
+  .ai-head span{font-size:11.5px; color:var(--fg-dim); display:block;}
+  .ai-body{flex:1; overflow-y:auto; padding:16px 18px; display:flex; flex-direction:column; gap:12px;}
+  .msg{max-width:85%; font-size:13.5px; line-height:1.5; padding:10px 13px; border-radius:5px;}
+  .msg.bot{background:#1e1e1e; align-self:flex-start; border:1px solid var(--line);}
+  .msg.user{background:var(--fg); color:var(--bg); align-self:flex-end;}
+  .ai-quick{display:flex; flex-wrap:wrap; gap:6px; padding:0 18px 12px;}
+  .chip{
+    font-size:11.5px; border:1px solid var(--line-strong); color:var(--fg-dim); padding:6px 10px;
+    border-radius:20px; cursor:pointer; background:none; transition:all .2s ease;
+  }
+  .chip:hover{border-color:var(--fg); color:var(--fg);}
+  .ai-input{display:flex; border-top:1px solid var(--line);}
+  .ai-input input{
+    flex:1; background:none; border:none; color:var(--fg); padding:14px 16px; font-family:'Space Grotesk',sans-serif; font-size:13.5px;
+  }
+  .ai-input input:focus{outline:none;}
+  .ai-input button{
+    background:none; border:none; color:var(--fg); padding:0 18px; cursor:pointer; font-size:15px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <nav class="nav">
+    <a href="#top" class="brand" aria-label="Over∞Stile home">
+      <svg class="mark" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="chromeNav" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#4b4b4b"/>
+            <stop offset="25%" stop-color="#ffffff"/>
+            <stop offset="50%" stop-color="#8c8c8c"/>
+            <stop offset="75%" stop-color="#f2f2f2"/>
+            <stop offset="100%" stop-color="#333333"/>
+            <animateTransform attributeName="gradientTransform" type="rotate" from="0 0.5 0.5" to="360 0.5 0.5" dur="14s" repeatCount="indefinite"/>
+          </linearGradient>
+        </defs>
+        <path d="M100,50 C100,22 78,10 55,10 C25,10 5,28 5,50 C5,72 25,90 55,90 C78,90 100,78 100,50 C100,22 122,10 145,10 C175,10 195,28 195,50 C195,72 175,90 145,90 C122,90 100,78 100,50 Z"
+              fill="none" stroke="url(#chromeNav)" stroke-width="11" stroke-linecap="round"/>
+      </svg>
+      <span class="word">OVER<span class="chrome-text">∞</span>STILE</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Apri menu">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#manifesto">Manifesto</a>
+      <a href="#catalogo">Catalogo</a>
+      <a href="#contatti">Contatti</a>
+      <a href="#shop-link" class="nav-cta">Shop ↗</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <svg class="hero-mark" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="chromeHero" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#4b4b4b"/>
+        <stop offset="25%" stop-color="#ffffff"/>
+        <stop offset="50%" stop-color="#8c8c8c"/>
+        <stop offset="75%" stop-color="#f2f2f2"/>
+        <stop offset="100%" stop-color="#333333"/>
+        <animateTransform attributeName="gradientTransform" type="rotate" from="0 0.5 0.5" to="360 0.5 0.5" dur="18s" repeatCount="indefinite"/>
+      </linearGradient>
+    </defs>
+    <path d="M100,50 C100,22 78,10 55,10 C25,10 5,28 5,50 C5,72 25,90 55,90 C78,90 100,78 100,50 C100,22 122,10 145,10 C175,10 195,28 195,50 C195,72 175,90 145,90 C122,90 100,78 100,50 Z"
+          fill="none" stroke="url(#chromeHero)" stroke-width="7"/>
+  </svg>
+  <div class="hero-inner">
+    <p class="eyebrow">Streetwear · Collezione permanente</p>
+    <h1 class="wordmark">OVER<span class="inf chrome-text">∞</span>STILE</h1>
+    <p class="tagline">Magliette grafiche per chi non ha bisogno di spiegarsi. Nessuna fretta, nessuna scusa — solo stile che si ripete all'infinito.</p>
+    <div class="hero-actions">
+      <a href="#catalogo" class="btn btn-primary">Vedi la collezione</a>
+      <a href="#contatti" class="btn btn-ghost">Contattaci</a>
+    </div>
+  </div>
+  <div class="scroll-cue"><span class="line"></span>Scroll</div>
+</section>
+
+<!-- ============ MANIFESTO ============ -->
+<section class="manifesto" id="manifesto">
+  <div class="wrap">
+    <p class="eyebrow">Il manifesto</p>
+    <div>
+      <h2>Non seguiamo i trend. Li lasciamo passare, con nonchalance, e restiamo con quello che conta.</h2>
+      <p>Over∞Stile nasce da un'idea semplice: uno stile che non deve dimostrare niente a nessuno. Grafiche essenziali, tessuti onesti, stampe che durano più di una stagione. Un capo alla volta, senza rumore.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CATALOGO ============ -->
+<section id="catalogo">
+  <div class="wrap">
+    <div class="cat-head">
+      <div>
+        <p class="eyebrow">Collezione</p>
+        <h2 style="margin-top:14px;">Magliette grafiche</h2>
+      </div>
+      <p class="cat-note">Ogni pezzo è stampato su richiesta e spedito tramite Tapstitch — zero magazzino, zero sprechi.</p>
+    </div>
+
+    <div class="grid-products">
+      <!-- PRODOTTO 1 -->
+      <article class="product">
+        <div class="tee-stage">
+          <div class="tee-shape"><span class="graphic">NOTTE<br>ETERNA</span></div>
+        </div>
+        <div>
+          <h3>Notte Eterna Tee</h3>
+        </div>
+        <div class="meta">
+          <span class="price">€ 29</span>
+          <a href="#" class="go" data-tapstitch-slot="1">Vedi su Tapstitch →</a>
+        </div>
+      </article>
+
+      <!-- PRODOTTO 2 -->
+      <article class="product">
+        <div class="tee-stage">
+          <div class="tee-shape stripe"><span class="graphic">OS ∞</span></div>
+        </div>
+        <div>
+          <h3>Monogramma Chrome Tee</h3>
+        </div>
+        <div class="meta">
+          <span class="price">€ 32</span>
+          <a href="#" class="go" data-tapstitch-slot="2">Vedi su Tapstitch →</a>
+        </div>
+      </article>
+
+      <!-- PRODOTTO 3 -->
+      <article class="product">
+        <div class="tee-stage">
+          <div class="tee-shape"><span class="graphic">SENZA<br>TEMPO</span></div>
+        </div>
+        <div>
+          <h3>Senza Tempo Tee</h3>
+        </div>
+        <div class="meta">
+          <span class="price">€ 29</span>
+          <a href="#" class="go" data-tapstitch-slot="3">Vedi su Tapstitch →</a>
+        </div>
+      </article>
+
+      <!-- PRODOTTO 4 -->
+      <article class="product">
+        <div class="tee-stage">
+          <div class="tee-shape stripe"><span class="graphic">ANIMA<br>URBANA</span></div>
+        </div>
+        <div>
+          <h3>Anima Urbana Tee</h3>
+        </div>
+        <div class="meta">
+          <span class="price">€ 30</span>
+          <a href="#" class="go" data-tapstitch-slot="4">Vedi su Tapstitch →</a>
+        </div>
+      </article>
+
+      <!-- PRODOTTO 5 -->
+      <article class="product">
+        <div class="tee-stage">
+          <div class="tee-shape"><span class="graphic">SILENZIO</span></div>
+        </div>
+        <div>
+          <h3>Silenzio Tee</h3>
+        </div>
+        <div class="meta">
+          <span class="price">€ 29</span>
+          <a href="#" class="go" data-tapstitch-slot="5">Vedi su Tapstitch →</a>
+        </div>
+      </article>
+
+      <!-- PRODOTTO 6 -->
+      <article class="product">
+        <div class="tee-stage">
+          <div class="tee-shape stripe"><span class="graphic">OVER∞<br>STILE</span></div>
+        </div>
+        <div>
+          <h3>Classic Wordmark Tee</h3>
+        </div>
+        <div class="meta">
+          <span class="price">€ 32</span>
+          <a href="#" class="go" data-tapstitch-slot="6">Vedi su Tapstitch →</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST STRIP ============ -->
+<section class="trust">
+  <div class="wrap">
+    <div class="trust-item">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--fg)" stroke-width="1.3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>
+      <div><h4>Materiali onesti</h4><p>Cotone pettinato, vestibilità pensata per durare oltre la stagione.</p></div>
+    </div>
+    <div class="trust-item">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--fg)" stroke-width="1.3"><path d="M4 4h16v16H4z"/><path d="M4 10h16M10 4v16"/></svg>
+      <div><h4>Stampa che resiste</h4><p>Grafiche DTG ad alta definizione, pensate per non sbiadire lavaggio dopo lavaggio.</p></div>
+    </div>
+    <div class="trust-item">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--fg)" stroke-width="1.3"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15.5 0 18M12 3c-2.5 2.5-2.5 15.5 0 18"/></svg>
+      <div><h4>Spedizione globale</h4><p>Ogni ordine è prodotto e spedito da Tapstitch, ovunque tu sia.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTATTI / SOCIAL ============ -->
+<section class="contatti" id="contatti">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Contatti</p>
+      <h2 style="margin-top:14px;">Scrivici</h2>
+      <p class="lead">Domande su un capo, una taglia, una collaborazione? Rispondiamo sempre — con calma, ma rispondiamo.</p>
+
+      <form id="contactForm" action="mailto:info@overinfinitostile.com" method="post" enctype="text/plain">
+        <div class="field">
+          <label for="cf-name">Nome</label>
+          <input id="cf-name" type="text" name="nome" required>
+        </div>
+        <div class="field">
+          <label for="cf-email">Email</label>
+          <input id="cf-email" type="email" name="email" required>
+        </div>
+        <div class="field">
+          <label for="cf-msg">Messaggio</label>
+          <textarea id="cf-msg" name="messaggio" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary form-submit">Invia messaggio</button>
+      </form>
+    </div>
+
+    <div>
+      <p class="eyebrow">Social</p>
+      <div class="social-list" style="margin-top:14px;">
+        <a href="#" target="_blank" rel="noopener">Instagram <span class="handle">@overinfinitostile</span><span class="arrow">→</span></a>
+        <a href="#" target="_blank" rel="noopener">TikTok <span class="handle">@overinfinitostile</span><span class="arrow">→</span></a>
+        <a href="#" target="_blank" rel="noopener">Tapstitch Store <span class="handle">shop</span><span class="arrow">→</span></a>
+      </div>
+      <p class="contact-direct">Oppure scrivi direttamente a <a href="mailto:info@overinfinitostile.com">info@overinfinitostile.com</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <span class="word">OVER∞STILE</span>
+    <div class="flinks">
+      <a href="#manifesto">Manifesto</a>
+      <a href="#catalogo">Catalogo</a>
+      <a href="#contatti">Contatti</a>
+    </div>
+    <span class="fine">© 2026 Over∞Stile</span>
+  </div>
+</footer>
+
+<!-- ============ AI ASSISTANT ============ -->
+<button class="ai-toggle" id="aiToggle" aria-label="Apri assistente clienti">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5 8.4 8.4 0 0 1-3.8-.9L3 20l1-4.6A8.5 8.5 0 1 1 21 11.5Z"/></svg>
+</button>
+
+<div class="ai-panel" id="aiPanel">
+  <div class="ai-head">
+    <span class="ai-dot"></span>
+    <div>
+      <strong>Assistente Over∞Stile</strong>
+      <span>Risponde di solito subito</span>
+    </div>
+  </div>
+  <div class="ai-body" id="aiBody">
+    <div class="msg bot">Ehi. Chiedimi di taglie, spedizioni, resi o materiali — vado dritto al punto.</div>
+  </div>
+  <div class="ai-quick">
+    <button class="chip" data-q="taglie">Taglie</button>
+    <button class="chip" data-q="spedizione">Spedizioni</button>
+    <button class="chip" data-q="resi">Resi</button>
+    <button class="chip" data-q="materiali">Materiali</button>
+  </div>
+  <div class="ai-input">
+    <input type="text" id="aiInput" placeholder="Scrivi qui...">
+    <button id="aiSend" aria-label="Invia">↑</button>
+  </div>
+</div>
+
+<script>
+  // Menu mobile
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Assistente AI — motore a regole, nessun backend richiesto
+  const aiToggle = document.getElementById('aiToggle');
+  const aiPanel = document.getElementById('aiPanel');
+  const aiBody = document.getElementById('aiBody');
+  const aiInput = document.getElementById('aiInput');
+  const aiSend = document.getElementById('aiSend');
+
+  aiToggle.addEventListener('click', () => aiPanel.classList.toggle('open'));
+
+  const risposte = [
+    { chiavi: ['taglia','taglie','size','misure'], testo: 'Vestibilità regular, tabella taglie da XS a XXL. Se sei tra due misure, prendi quella sopra: le nostre tee non stringono le abitudini.' },
+    { chiavi: ['spediz','consegna','arriva','tempi'], testo: 'Ogni capo è stampato su richiesta tramite Tapstitch: produzione 2-5 giorni, spedizione 5-12 giorni lavorativi in base alla destinazione.' },
+    { chiavi: ['reso','rimbors','cambio'], testo: 'Reso entro 14 giorni se il capo non è stato indossato. Scrivici dalla sezione Contatti con il numero d\\'ordine, ci pensiamo noi.' },
+    { chiavi: ['material','tessut','cotone','qualit'], testo: 'Cotone pettinato 180-200 g/m², stampa DTG. Resiste a lavaggi ripetuti senza perdere colore — nessun compromesso.' },
+    { chiavi: ['pagament','carta','paypal'], testo: 'Pagamenti gestiti in sicurezza tramite Tapstitch al checkout: carta, PayPal e principali wallet.' },
+    { chiavi: ['ciao','salve','hey'], testo: 'Ehi. Dimmi pure di cosa hai bisogno — taglie, spedizioni, resi o materiali.' },
+  ];
+
+  function aggiungiMessaggio(testo, tipo){
+    const div = document.createElement('div');
+    div.className = 'msg ' + tipo;
+    div.textContent = testo;
+    aiBody.appendChild(div);
+    aiBody.scrollTop = aiBody.scrollHeight;
+  }
+
+  function rispondi(input){
+    const testo = input.toLowerCase();
+    const trovata = risposte.find(r => r.chiavi.some(k => testo.includes(k)));
+    return trovata ? trovata.testo : 'Non sono sicuro di aver capito — prova a chiedermi di taglie, spedizioni, resi o materiali, oppure scrivici dal form Contatti.';
+  }
+
+  function invia(testoInput){
+    const val = (testoInput || aiInput.value).trim();
+    if(!val) return;
+    aggiungiMessaggio(val, 'user');
+    aiInput.value = '';
+    setTimeout(() => aggiungiMessaggio(rispondi(val), 'bot'), 500);
+  }
+
+  aiSend.addEventListener('click', () => invia());
+  aiInput.addEventListener('keydown', e => { if(e.key === 'Enter') invia(); });
+  document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => invia(c.dataset.q)));
+</script>
+</body>
+</html>
