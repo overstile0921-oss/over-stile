@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Over∞Stile — Streetwear</title>
-<meta name="description" content="Over∞Stile — magliette grafiche streetwear. Collezione, contatti e assistenza.">
+<title>Thasup White Graphic Tee — Over∞Stile</title>
+<meta name="description" content="Thasup White Graphic Tee — Over∞Stile Graphic Teez Studios.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -318,14 +318,78 @@
   .ai-input button{
     background:none; border:none; color:var(--fg); padding:0 18px; cursor:pointer; font-size:15px;
   }
+
+<style>
+  .product-hero{padding:150px 0 100px;}
+  .product-hero .wrap{display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start;}
+  @media (max-width:820px){ .product-hero .wrap{grid-template-columns:1fr; gap:36px;} .product-hero{padding:120px 0 70px;} }
+  .product-img{
+    background:#fff; border-radius:6px; overflow:hidden; position:relative;
+  }
+  .product-img img{width:100%; height:auto; display:block;}
+  .back-link{
+    display:inline-flex; align-items:center; gap:8px; margin-bottom:30px; font-size:12px;
+    letter-spacing:.08em; text-transform:uppercase; color:var(--fg-dim); border-bottom:1px solid var(--fg-faint);
+    padding-bottom:2px; transition:color .25s ease;
+  }
+  .back-link:hover{color:var(--fg);}
+  .product-info h1{
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:clamp(26px,3.6vw,38px);
+    line-height:1.2; letter-spacing:-.01em; margin-bottom:18px;
+  }
+  .product-info .price{font-size:22px; color:var(--fg); font-weight:600; display:block; margin-bottom:26px;}
+  .product-info .specs{
+    display:flex; flex-direction:column; gap:10px; color:var(--fg-dim); font-size:14px;
+    border-top:1px solid var(--line); padding:22px 0; margin-bottom:8px;
+  }
+  .product-info .specs b{color:var(--fg); font-weight:600;}
+
+  .size-select{margin-bottom:26px;}
+  .size-select .label{
+    font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--fg-dim);
+    display:flex; justify-content:space-between; margin-bottom:12px;
+  }
+  .size-select .label a{color:var(--fg-dim); text-decoration:underline; text-underline-offset:2px;}
+  .size-select .label a:hover{color:var(--fg);}
+  .size-opts{display:flex; flex-wrap:wrap; gap:8px;}
+  .size-opts button{
+    font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:500; letter-spacing:.02em;
+    background:transparent; color:var(--fg); border:1px solid var(--line-strong); border-radius:var(--radius);
+    padding:9px 14px; cursor:pointer; transition:all .2s ease;
+  }
+  .size-opts button:hover{border-color:var(--fg);}
+  .size-opts button.active{background:var(--fg); color:var(--bg); border-color:var(--fg);}
+  .size-hint{font-size:12px; color:var(--fg-faint); margin-top:10px;}
+
+  .size-chart{
+    margin:0 0 34px; border-collapse:collapse; width:100%; font-size:13px;
+  }
+  .size-chart caption{
+    text-align:left; font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--fg-dim); margin-bottom:12px;
+  }
+  .size-chart th, .size-chart td{
+    border:1px solid var(--line); padding:9px 10px; text-align:center; color:var(--fg-dim);
+  }
+  .size-chart th{color:var(--fg); font-weight:600; background:var(--bg-soft);}
+  .size-chart td:first-child, .size-chart th:first-child{text-align:left; color:var(--fg);}
+
+  .buy-form{display:flex; flex-direction:column; gap:10px;}
+  .btn-secondary-link{
+    font-size:12.5px; color:var(--fg-dim); border-bottom:1px solid var(--fg-faint);
+    padding-bottom:2px; display:inline-block; width:fit-content; margin-top:4px;
+  }
+  .btn-secondary-link:hover{color:var(--fg);}
+  .product-info .buy-note{color:var(--fg-faint); font-size:13px; margin-top:14px; max-width:42ch;}
 </style>
+
 </head>
 <body>
 
 <!-- ============ HEADER ============ -->
 <header>
   <nav class="nav">
-    <a href="#top" class="brand" aria-label="Over∞Stile home">
+    <a href="index.html" class="brand" aria-label="Over∞Stile home">
       <svg class="mark" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="chromeNav" x1="0" y1="0" x2="1" y2="1">
@@ -344,185 +408,74 @@
     </a>
     <button class="nav-toggle" id="navToggle" aria-label="Apri menu">☰</button>
     <div class="nav-links" id="navLinks">
-      <a href="#about-os">About OS</a>
-      <a href="#catalogo">Catalogo</a>
+      <a href="index.html#about-os">About OS</a>
+      <a href="index.html#catalogo">Catalogo</a>
       <a href="assistenza.html">Assistenza</a>
-      <a href="#contatti">Contatti</a>
-      <a href="#catalogo" class="nav-cta">Shop ↗</a>
+      <a href="index.html#contatti">Contatti</a>
+      <a href="index.html#catalogo" class="nav-cta">Shop ↗</a>
     </div>
   </nav>
 </header>
 
-<!-- ============ HERO ============ -->
-<section class="hero" id="top">
-  <div class="hero-bg" aria-hidden="true">
-    <div class="hero-bg-grid"></div>
-  </div>
-  <svg class="hero-mark" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="chromeHero" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="#4b4b4b"/>
-        <stop offset="25%" stop-color="#ffffff"/>
-        <stop offset="50%" stop-color="#8c8c8c"/>
-        <stop offset="75%" stop-color="#f2f2f2"/>
-        <stop offset="100%" stop-color="#333333"/>
-        <animateTransform attributeName="gradientTransform" type="rotate" from="0 0.5 0.5" to="360 0.5 0.5" dur="18s" repeatCount="indefinite"/>
-      </linearGradient>
-    </defs>
-    <path d="M100,50 C100,22 78,10 55,10 C25,10 5,28 5,50 C5,72 25,90 55,90 C78,90 100,78 100,50 C100,22 122,10 145,10 C175,10 195,28 195,50 C195,72 175,90 145,90 C122,90 100,78 100,50 Z"
-          fill="none" stroke="url(#chromeHero)" stroke-width="7"/>
-  </svg>
-  <div class="hero-inner">
-    <p class="eyebrow">Streetwear · Collezione permanente</p>
-    <h1 class="wordmark">OVER<span class="inf chrome-text">∞</span>STILE</h1>
-    <div class="hero-actions">
-      <a href="#catalogo" class="btn btn-primary">Vedi la collezione</a>
-      <a href="#contatti" class="btn btn-ghost">Contattaci</a>
-    </div>
-  </div>
-  <div class="scroll-cue"><span class="line"></span>Scroll</div>
-</section>
-
-<!-- ============ MANIFESTO ============ -->
-<section class="manifesto" id="about-os">
+<section class="product-hero">
   <div class="wrap">
-    <p class="eyebrow">About OS</p>
-    <div>
-      <h2>Progetto italiano di creazione di grafiche per abbigliamento streetwear. Benvenuti in Over∞Stile Graphic Teez Studios.</h2>
+    <div class="product-img">
+      <img src="assets/thasup-tee.jpg" alt="Thasup White Graphic Tee">
     </div>
-  </div>
-</section>
+    <div class="product-info">
+      <a href="index.html#catalogo" class="back-link">← Torna al catalogo</a>
+      <h1>Thasup White Graphic Tee</h1>
+      <span class="price">€ 29</span>
 
-<!-- ============ CATALOGO ============ -->
-<section id="catalogo">
-  <div class="wrap">
-    <div class="cat-head">
-      <div>
-        <p class="eyebrow">Collezione</p>
-        <h2 style="margin-top:14px;">Magliette grafiche</h2>
+      <div class="size-select">
+        <div class="label"><span>Taglia</span> <a href="#taglie-prodotto-thasup">Guida alle taglie</a></div>
+        <div class="size-opts" id="sizeOpts">
+          <button type="button" data-size="XS">XS</button>
+          <button type="button" data-size="S">S</button>
+          <button type="button" data-size="M">M</button>
+          <button type="button" data-size="L">L</button>
+          <button type="button" data-size="XL">XL</button>
+          <button type="button" data-size="XXL">XXL</button>
+          <button type="button" data-size="XXXL">XXXL</button>
+        </div>
+        <p class="size-hint" id="sizeHint">Seleziona una taglia prima di acquistare.</p>
       </div>
-      <p class="cat-note">Ogni pezzo è stampato su richiesta e spedito tramite Tapstitch — zero magazzino, zero sprechi.</p>
-    </div>
 
-    <div class="grid-products">
-      <!-- PRODOTTO 1 -->
-      <article class="product">
-        <a href="prodotto-lil-uzi-vert.html" class="tee-stage photo tee-link">
-          <img src="assets/lil-uzi-vert-tee.jpg" alt="Lil Uzi Vert White Punk Graphic Tee">
-        </a>
-        <div>
-          <h3>Lil Uzi Vert White Punk Graphic Tee</h3>
-          <span class="sizes-note">XS – XXXL</span>
-        </div>
-        <div class="meta">
-          <span class="price">€ 23</span>
-          <a href="prodotto-lil-uzi-vert.html" class="go">Vedi il prodotto →</a>
-        </div>
-      </article>
+      <div class="specs">
+        <span><b>Tessuto:</b> cotone pettinato, unisex oversized</span>
+        <span><b>Stampa:</b> DTG alta definizione</span>
+        <span><b>Taglie disponibili:</b> XS – XXXL</span>
+        <span><b>Spedizione:</b> stampato su richiesta, 5-12 giorni lavorativi</span>
+      </div>
 
-      <!-- PRODOTTO 2 -->
-      <article class="product">
-        <a href="prodotto-playboi-carti.html" class="tee-stage photo tee-link">
-          <img src="assets/playboi-carti-tee.jpg" alt="Playboi Carti I Am Music Black&amp;White Graphic Tee">
-        </a>
-        <div>
-          <h3>Playboi Carti I Am Music Black&amp;White Graphic Tee</h3>
-          <span class="sizes-note">XS – XXXL</span>
-        </div>
-        <div class="meta">
-          <span class="price">€ 35</span>
-          <a href="prodotto-playboi-carti.html" class="go">Vedi il prodotto →</a>
-        </div>
-      </article>
-
-      <!-- PRODOTTO 3 -->
-      <article class="product">
-        <a href="prodotto-thasup.html" class="tee-stage photo tee-link">
-          <img src="assets/thasup-tee.jpg" alt="Thasup White Graphic Tee">
-        </a>
-        <div>
-          <h3>Thasup White Graphic Tee</h3>
-          <span class="sizes-note">XS – XXXL</span>
-        </div>
-        <div class="meta">
-          <span class="price">€ 29</span>
-          <a href="prodotto-thasup.html" class="go">Vedi il prodotto →</a>
-        </div>
-      </article>
-
-      <!-- PLACEHOLDER 1 -->
-      <article class="product product-soon">
-        <div class="tee-stage">
-          <div class="tee-shape soon"><span class="graphic">new products ASAP</span></div>
-        </div>
-      </article>
-
-      <!-- PLACEHOLDER 2 -->
-      <article class="product product-soon">
-        <div class="tee-stage">
-          <div class="tee-shape soon"><span class="graphic">new products ASAP</span></div>
-        </div>
-      </article>
-
-      <!-- PLACEHOLDER 3 -->
-      <article class="product product-soon">
-        <div class="tee-stage">
-          <div class="tee-shape soon"><span class="graphic">new products ASAP</span></div>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ============ TRUST STRIP ============ -->
-<section class="trust">
-  <div class="wrap">
-    <div class="trust-item">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--fg)" stroke-width="1.3"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>
-      <div><h4>Materiali onesti</h4><p>Cotone pettinato, vestibilità pensata per durare oltre la stagione.</p></div>
-    </div>
-    <div class="trust-item">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--fg)" stroke-width="1.3"><path d="M4 4h16v16H4z"/><path d="M4 10h16M10 4v16"/></svg>
-      <div><h4>Stampa che resiste</h4><p>Grafiche DTG ad alta definizione, pensate per non sbiadire lavaggio dopo lavaggio.</p></div>
-    </div>
-    <div class="trust-item">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--fg)" stroke-width="1.3"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15.5 0 18M12 3c-2.5 2.5-2.5 15.5 0 18"/></svg>
-      <div><h4>Spedizione globale</h4><p>Ogni ordine è prodotto e spedito da Tapstitch, ovunque tu sia.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CONTATTI / SOCIAL ============ -->
-<section class="contatti" id="contatti">
-  <div class="wrap">
-    <div>
-      <p class="eyebrow">Contatti</p>
-      <h2 style="margin-top:14px;">Scrivici</h2>
-      <p class="lead">Domande su un capo, una taglia, una collaborazione? Rispondiamo sempre — con calma, ma rispondiamo.</p>
-
-      <form id="contactForm">
-        <div class="field">
-          <label for="cf-name">Nome</label>
-          <input id="cf-name" type="text" name="nome" required>
-        </div>
-        <div class="field">
-          <label for="cf-email">Email</label>
-          <input id="cf-email" type="email" name="email" required>
-        </div>
-        <div class="field">
-          <label for="cf-msg">Messaggio</label>
-          <textarea id="cf-msg" name="messaggio" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary form-submit">Invia messaggio</button>
+      <form class="buy-form" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" id="paypalForm">
+        <input type="hidden" name="cmd" value="_xclick">
+        <input type="hidden" name="business" value="over.stile0921@gmail.com">
+        <input type="hidden" name="item_name" value="Thasup White Graphic Tee">
+        <input type="hidden" name="amount" value="29.00">
+        <input type="hidden" name="currency_code" value="EUR">
+        <input type="hidden" name="on0" value="Taglia">
+        <input type="hidden" name="os0" id="os0" value="">
+        <input type="hidden" name="no_shipping" value="0">
+        <button type="submit" class="btn btn-primary" id="buyBtn" disabled>Acquista ora — Paga con PayPal</button>
       </form>
-    </div>
+      <a href="#" id="emailFallback" target="_blank" rel="noopener" class="btn-secondary-link">oppure ordina via email</a>
 
-    <div>
-      <p class="eyebrow">Email</p>
-      <div class="social-list" style="margin-top:14px;">
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=over.stile0921@gmail.com" target="_blank" rel="noopener">Scrivici su Gmail <span class="handle">over.stile0921@gmail.com</span><span class="arrow">→</span></a>
-      </div>
-      <p class="contact-direct">Oppure scrivi direttamente a <a href="mailto:over.stile0921@gmail.com">over.stile0921@gmail.com</a></p>
+      <table class="size-chart" id="taglie-prodotto-thasup">
+        <caption>Guida alle taglie (misure indicative, cm)</caption>
+        <thead>
+          <tr><th>Taglia</th><th>Larghezza torace</th><th>Lunghezza</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>XS</td><td>104</td><td>68</td></tr>
+          <tr><td>S</td><td>110</td><td>70</td></tr>
+          <tr><td>M</td><td>116</td><td>72</td></tr>
+          <tr><td>L</td><td>122</td><td>74</td></tr>
+          <tr><td>XL</td><td>128</td><td>76</td></tr>
+          <tr><td>XXL</td><td>134</td><td>78</td></tr>
+          <tr><td>XXXL</td><td>140</td><td>80</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
@@ -532,10 +485,10 @@
   <div class="wrap">
     <span class="word">OVER∞STILE</span>
     <div class="flinks">
-      <a href="#about-os">About OS</a>
-      <a href="#catalogo">Catalogo</a>
+      <a href="index.html#about-os">About OS</a>
+      <a href="index.html#catalogo">Catalogo</a>
       <a href="assistenza.html">Assistenza</a>
-      <a href="#contatti">Contatti</a>
+      <a href="index.html#contatti">Contatti</a>
     </div>
     <span class="fine">© 2026 Over∞Stile</span>
   </div>
@@ -633,6 +586,39 @@
   aiSend.addEventListener('click', () => invia());
   aiInput.addEventListener('keydown', e => { if(e.key === 'Enter') invia(); });
   document.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => invia(c.dataset.q)));
+</script>
+</body>
+</html>
+
+<script>
+  (function(){
+    const opts = document.querySelectorAll('#sizeOpts button');
+    const os0 = document.getElementById('os0');
+    const buyBtn = document.getElementById('buyBtn');
+    const sizeHint = document.getElementById('sizeHint');
+    const emailFallback = document.getElementById('emailFallback');
+    let selected = null;
+
+    function buildEmailLink(){
+      const sizeTxt = selected ? selected : '___';
+      const subject = encodeURIComponent('Ordine - Thasup White Graphic Tee');
+      const body = encodeURIComponent('Ciao, vorrei ordinare: Thasup White Graphic Tee\nTaglia: ' + sizeTxt + '\nPrezzo: € 29\n\nNome:\nIndirizzo di spedizione:');
+      return 'https://mail.google.com/mail/?view=cm&fs=1&to=over.stile0921@gmail.com&su=' + subject + '&body=' + body;
+    }
+    emailFallback.href = buildEmailLink();
+
+    opts.forEach(btn => {
+      btn.addEventListener('click', () => {
+        opts.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selected = btn.dataset.size;
+        os0.value = selected;
+        buyBtn.disabled = false;
+        sizeHint.textContent = 'Taglia selezionata: ' + selected;
+        emailFallback.href = buildEmailLink();
+      });
+    });
+  })();
 </script>
 </body>
 </html>
