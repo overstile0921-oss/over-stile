@@ -192,7 +192,7 @@
     position:relative; height:230px; display:flex; align-items:center; justify-content:center;
   }
   .tee-stage.photo{
-    height:260px; background:#fff; border-radius:6px; overflow:hidden;
+    height:320px; background:#fff; border-radius:6px; overflow:hidden;
   }
   .tee-shape{
     width:150px; height:170px;
@@ -210,17 +210,58 @@
     content:""; position:absolute; inset:0;
     background:repeating-linear-gradient(115deg, transparent 0 12px, rgba(244,242,236,.05) 12px 13px);
   }
-  .tee-link{cursor:pointer;}
-  .tee-stage.photo img{
-    width:100%; height:100%; object-fit:contain; padding:16px;
-    background:#fff; transition:transform .35s ease;
-  }
-  .product:hover .tee-stage.photo img{transform:scale(1.05);}
   .tee-shape.soon{
     background:transparent; border:1px dashed var(--line-strong);
   }
   .tee-shape.soon .graphic{color:var(--fg-dim); text-transform:uppercase; font-size:12px;}
   .product-soon{align-items:center; justify-content:center;}
+
+  /* ---------- Carosello prodotto (fronte / retro / streetwear) ---------- */
+  .pcarousel{
+    position:relative; width:100%; height:320px; overflow:hidden; background:#fff; border-radius:6px;
+  }
+  .pcarousel-track{
+    display:flex; width:100%; height:100%; transition:transform .4s cubic-bezier(.4,0,.2,1);
+  }
+  .pcarousel-slide{
+    flex:0 0 100%; height:100%; display:flex; align-items:center; justify-content:center; overflow:hidden;
+  }
+  .pcarousel-slide a{display:flex; width:100%; height:100%; align-items:center; justify-content:center;}
+  .pcarousel-slide img, .pcarousel-slide svg{
+    width:100%; height:100%; object-fit:contain; padding:16px; transition:transform .35s ease;
+  }
+  .pcarousel-slide.illus{background:#0a0a0a;}
+  .pcarousel-slide.illus svg{padding:0; object-fit:cover;}
+  .product:hover .pcarousel-slide img{transform:scale(1.04);}
+  .pcarousel-arrow{
+    position:absolute; top:50%; transform:translateY(-50%); z-index:3;
+    width:30px; height:30px; border-radius:50%; border:none; cursor:pointer;
+    background:rgba(10,10,10,.55); color:#f4f2ec; display:flex; align-items:center; justify-content:center;
+    font-size:15px; opacity:0; transition:opacity .2s ease, background .2s ease;
+  }
+  .pcarousel:hover .pcarousel-arrow{opacity:1;}
+  .pcarousel-arrow:hover{background:rgba(10,10,10,.85);}
+  .pcarousel-arrow.prev{left:8px;}
+  .pcarousel-arrow.next{right:8px;}
+  .pcarousel-dots{
+    position:absolute; bottom:10px; left:0; right:0; z-index:3;
+    display:flex; justify-content:center; gap:6px;
+  }
+  .pcarousel-dots .dot{
+    width:6px; height:6px; border-radius:50%; background:rgba(20,20,20,.28); border:none; padding:0; cursor:pointer;
+    transition:background .2s ease, transform .2s ease;
+  }
+  .pcarousel-dots .dot.active{background:#141414; transform:scale(1.3);}
+  .pcarousel-slide.illus ~ .pcarousel-dots .dot{ }
+  .pcarousel[data-active-illus="true"] .pcarousel-dots .dot{background:rgba(244,242,236,.35);}
+  .pcarousel[data-active-illus="true"] .pcarousel-dots .dot.active{background:#f4f2ec;}
+  .pcarousel.hero{box-sizing:content-box; height:0; padding-bottom:100%; position:relative;}
+  .pcarousel.hero .pcarousel-track{position:absolute; inset:0;}
+  .pcarousel.hero .pcarousel-arrow{width:46px; height:46px; font-size:22px; opacity:1;}
+  .pcarousel.hero .pcarousel-arrow.prev{left:16px;}
+  .pcarousel.hero .pcarousel-arrow.next{right:16px;}
+  .pcarousel.hero .pcarousel-dots{bottom:18px;}
+  .pcarousel.hero .pcarousel-dots .dot{width:8px; height:8px;}
   .product h3{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:17px;}
   .sizes-note{display:block; margin-top:6px; font-size:12px; letter-spacing:.06em; color:var(--fg-faint); text-transform:uppercase;}
   .product .meta{display:flex; justify-content:space-between; align-items:center;}
@@ -474,6 +515,41 @@
       window.open('https://mail.google.com/mail/?view=cm&fs=1&to=over.stile0921@gmail.com&su=' + subject + '&body=' + body, '_blank');
     });
   }
+
+  // Caroselli prodotto (fronte / retro / streetwear)
+  document.querySelectorAll('.pcarousel').forEach(function(car){
+    const track = car.querySelector('.pcarousel-track');
+    const slides = car.querySelectorAll('.pcarousel-slide');
+    const dots = car.querySelectorAll('.pcarousel-dots .dot');
+    const prevBtn = car.querySelector('.pcarousel-arrow.prev');
+    const nextBtn = car.querySelector('.pcarousel-arrow.next');
+    let index = 0;
+
+    function update(){
+      track.style.transform = 'translateX(-' + (index * 100) + '%)';
+      dots.forEach((d,i) => d.classList.toggle('active', i === index));
+      car.setAttribute('data-active-illus', slides[index].classList.contains('illus') ? 'true' : 'false');
+    }
+    function go(i){
+      index = (i + slides.length) % slides.length;
+      update();
+    }
+    prevBtn.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); go(index - 1); });
+    nextBtn.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); go(index + 1); });
+    dots.forEach((d, i) => d.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); go(i); }));
+
+    // swipe touch support
+    let startX = null;
+    track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
+    track.addEventListener('touchend', e => {
+      if(startX === null) return;
+      const dx = e.changedTouches[0].clientX - startX;
+      if(dx > 40) go(index - 1);
+      else if(dx < -40) go(index + 1);
+      startX = null;
+    });
+    update();
+  });
 
   // Menu mobile
   const navToggle = document.getElementById('navToggle');
