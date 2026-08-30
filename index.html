@@ -1120,12 +1120,7 @@ transition_js = """<script>
 </script>
 </body>"""
 nclose = s.count("</body>")
-s = s.rsplit("</body>", 1)[0] + transition_js + s.rsplit("</body>", 1)[1]
-
-open(path,'w',encoding='utf-8').write(s)
-print(path, "body_replaced:", nbody, "close_count:", nclose, "css_zero_hits:", [k for k,v in counts.items() if v==0])
-PYEOF
-done
+s = s.rsplit("</body>", 1)[0] + transition_js + s.rsplit("</body>", 1)[placed: 1 close_count: 1 css_zero_hits: []\nassistenza.html body_replaced: 1 close_count:
 </script>
 </body>
 </html>
