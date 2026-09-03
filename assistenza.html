@@ -225,42 +225,47 @@
     position:relative; width:100%; height:320px; overflow:hidden; background:#fff; border-radius:6px;
   }
   .pcarousel-track{
-    display:flex; width:100%; height:100%; transition:transform .4s cubic-bezier(.4,0,.2,1);
+    display:flex; width:100%; height:100%;
+    overflow-x:auto; scroll-snap-type:x mandatory; scroll-behavior:smooth;
+    -webkit-overflow-scrolling:touch; user-select:none;
+    scrollbar-width:none; -ms-overflow-style:none;
   }
+  .pcarousel-track::-webkit-scrollbar{display:none; height:0;}
   .pcarousel-slide{
-    flex:0 0 100%; height:100%; display:flex; align-items:center; justify-content:center; overflow:hidden;
+    flex:0 0 100%; width:100%; height:100%; scroll-snap-align:start; scroll-snap-stop:always;
+    display:flex; align-items:center; justify-content:center; overflow:hidden;
   }
   .pcarousel-slide a{display:flex; width:100%; height:100%; align-items:center; justify-content:center;}
   .pcarousel-slide img, .pcarousel-slide svg{
     width:100%; height:100%; object-fit:contain; padding:16px; transition:transform .35s ease;
+    pointer-events:none; -webkit-user-drag:none; user-drag:none;
   }
   .product:hover .pcarousel-slide img{transform:scale(1.04);}
   .pcarousel-arrow{
-    position:absolute; top:50%; transform:translateY(-50%); z-index:3;
-    width:30px; height:30px; border-radius:50%; border:none; cursor:pointer;
-    background:rgba(10,10,10,.55); color:#f4f2ec; display:flex; align-items:center; justify-content:center;
-    font-size:15px; opacity:0; transition:opacity .2s ease, background .2s ease;
+    position:absolute; top:50%; transform:translateY(-50%); z-index:5;
+    width:32px; height:32px; border-radius:50%; border:none; cursor:pointer;
+    background:rgba(10,10,10,.6); color:#f4f2ec; display:flex; align-items:center; justify-content:center;
+    font-size:16px; opacity:1; transition:opacity .2s ease, background .2s ease;
   }
-  .pcarousel:hover .pcarousel-arrow{opacity:1;}
-  .pcarousel-arrow:hover{background:rgba(10,10,10,.85);}
+  .pcarousel-arrow:hover{background:rgba(10,10,10,.9);}
   .pcarousel-arrow.prev{left:8px;}
   .pcarousel-arrow.next{right:8px;}
   .pcarousel-dots{
-    position:absolute; bottom:10px; left:0; right:0; z-index:3;
-    display:flex; justify-content:center; gap:6px;
+    position:absolute; bottom:10px; left:0; right:0; z-index:5;
+    display:flex; justify-content:center; gap:7px;
   }
   .pcarousel-dots .dot{
-    width:6px; height:6px; border-radius:50%; background:rgba(20,20,20,.28); border:none; padding:0; cursor:pointer;
-    transition:background .2s ease, transform .2s ease;
+    width:8px; height:8px; border-radius:50%; background:rgba(20,20,20,.35); border:1px solid rgba(20,20,20,.5);
+    padding:0; cursor:pointer; transition:background .2s ease, transform .2s ease;
   }
   .pcarousel-dots .dot.active{background:#141414; transform:scale(1.3);}
   .pcarousel.hero{aspect-ratio:1/1; height:auto; position:relative;}
   .pcarousel.hero .pcarousel-track{position:absolute; inset:0;}
-  .pcarousel.hero .pcarousel-arrow{width:46px; height:46px; font-size:22px; opacity:1;}
+  .pcarousel.hero .pcarousel-arrow{width:46px; height:46px; font-size:22px;}
   .pcarousel.hero .pcarousel-arrow.prev{left:16px;}
   .pcarousel.hero .pcarousel-arrow.next{right:16px;}
   .pcarousel.hero .pcarousel-dots{bottom:18px;}
-  .pcarousel.hero .pcarousel-dots .dot{width:8px; height:8px;}
+  .pcarousel.hero .pcarousel-dots .dot{width:9px; height:9px;}
   .product h3{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:19px;}
   .sizes-note{display:block; margin-top:6px; font-size:13px; letter-spacing:.06em; color:var(--fg-faint); text-transform:uppercase;}
   .product .meta{display:flex; justify-content:space-between; align-items:center;}
@@ -546,38 +551,65 @@
     });
   }
 
-  // Caroselli prodotto (fronte / retro / streetwear)
+  // Caroselli prodotto (fronte / retro / streetwear) — scroll nativo con snap
   document.querySelectorAll('.pcarousel').forEach(function(car){
     const track = car.querySelector('.pcarousel-track');
-    const slides = car.querySelectorAll('.pcarousel-slide');
-    const dots = car.querySelectorAll('.pcarousel-dots .dot');
+    const slides = Array.prototype.slice.call(car.querySelectorAll('.pcarousel-slide'));
+    const dots = Array.prototype.slice.call(car.querySelectorAll('.pcarousel-dots .dot'));
     const prevBtn = car.querySelector('.pcarousel-arrow.prev');
     const nextBtn = car.querySelector('.pcarousel-arrow.next');
-    let index = 0;
+    if(!track || slides.length === 0) return;
 
-    function update(){
-      track.style.transform = 'translateX(-' + (index * 100) + '%)';
-      dots.forEach((d,i) => d.classList.toggle('active', i === index));
+    function currentIndex(){
+      const w = track.clientWidth || 1;
+      return Math.round(track.scrollLeft / w);
     }
-    function go(i){
-      index = (i + slides.length) % slides.length;
-      update();
+    function setActiveDot(i){
+      dots.forEach(function(d, di){ d.classList.toggle('active', di === i); });
     }
-    if(prevBtn) prevBtn.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); go(index - 1); });
-    if(nextBtn) nextBtn.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); go(index + 1); });
-    dots.forEach((d, i) => d.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); go(i); }));
+    function goTo(i){
+      const n = slides.length;
+      const clamped = ((i % n) + n) % n;
+      track.scrollTo({ left: clamped * track.clientWidth, behavior:'smooth' });
+      setActiveDot(clamped);
+    }
 
-    // swipe touch support
-    let startX = null;
-    track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
-    track.addEventListener('touchend', e => {
-      if(startX === null) return;
-      const dx = e.changedTouches[0].clientX - startX;
-      if(dx > 40) go(index - 1);
-      else if(dx < -40) go(index + 1);
-      startX = null;
+    if(prevBtn) prevBtn.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); goTo(currentIndex() - 1); });
+    if(nextBtn) nextBtn.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); goTo(currentIndex() + 1); });
+    dots.forEach(function(d, i){ d.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); goTo(i); }); });
+
+    let scrollTimer = null;
+    track.addEventListener('scroll', function(){
+      if(scrollTimer) clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(function(){ setActiveDot(currentIndex()); }, 90);
+    }, {passive:true});
+
+    // ricalcola la posizione corretta dopo il resize (scrollTo senza 'smooth' per evitare scatti)
+    window.addEventListener('resize', function(){
+      track.scrollTo({ left: currentIndex() * track.clientWidth });
     });
-    update();
+
+    setActiveDot(0);
+
+    // drag-to-scroll per mouse (desktop) — touch e trackpad funzionano già nativamente
+    let isDown = false, startX = 0, startScroll = 0;
+    track.addEventListener('mousedown', function(e){
+      isDown = true;
+      startX = e.pageX;
+      startScroll = track.scrollLeft;
+      track.style.scrollBehavior = 'auto';
+    });
+    window.addEventListener('mouseup', function(){
+      if(!isDown) return;
+      isDown = false;
+      track.style.scrollBehavior = 'smooth';
+      goTo(currentIndex());
+    });
+    window.addEventListener('mousemove', function(e){
+      if(!isDown) return;
+      e.preventDefault();
+      track.scrollLeft = startScroll - (e.pageX - startX);
+    });
   });
 
   // Menu mobile
